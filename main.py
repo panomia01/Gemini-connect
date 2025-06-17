@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from utils.yfinance import get_esg_scores
 import google.generativeai as genai
 import yfinance as yf
 import os
@@ -10,18 +11,8 @@ app = Flask(__name__)
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 model = genai.GenerativeModel("gemini-2.0-flash")
 
-def get_esg_score(ticker_symbol):
-    try:
-        ticker = yf.Ticker(ticker_symbol)
-        info = ticker.sustainability
-        if info is not None and 'totalEsg' in info:
-            return float(info['totalEsg'])
-    except Exception as e:
-        print(f"[YFinance] Error for {ticker_symbol}: {e}")
-    return None
-
 @app.route("/get_ticker", methods=["GET"])
-async def get_ticker():
+def get_ticker():
     brand_name = request.args.get("brand_name")
     esg_score = request.args.get("esg_score", type=float)
 
@@ -47,7 +38,7 @@ async def get_ticker():
             ticker = item.get("ticker")
             if not ticker:
                 continue
-            score = await get_esg_score(ticker)
+            score = get_esg_scores(ticker)
             if score is not None and score < esg_score:
                 validated.append({
                     "brand_name": item.get("brand_name"),
