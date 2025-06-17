@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import google.generativeai as genai
 import json
-
+import os
 app = Flask(__name__)
 
 # Correct way to initialize Gemini
