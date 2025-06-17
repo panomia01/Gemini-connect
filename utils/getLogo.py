@@ -31,7 +31,7 @@ def fetch_image_url(domain):
     # Optional: clean up any trailing slashes
     domain = domain.lower().strip().replace("https://", "").replace("http://", "").replace("/", "")
 
-    return f"https://cdn.brandfetch.io/{domain}/w/250/h/150/logo"
+    return f"https://cdn.brandfetch.io/{domain}/w/250/h/150/logo?c=1idixjeVit8iMxTe5MU"
     
     # try:
     #     response = requests.get(url)
