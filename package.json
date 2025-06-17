@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "fask": "^0.3.3",
+    "flask": "^0.2.10",
+    "genai": "^0.0.18",
+    "jsonify": "^0.0.1",
+    "request": "^2.88.2"
+  }
+}

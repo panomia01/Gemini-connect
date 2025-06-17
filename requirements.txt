@@ -1,0 +1,5 @@
+gunicorn
+flask
+google-genai
+yfinance
+requests
