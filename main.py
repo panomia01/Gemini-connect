@@ -20,11 +20,11 @@ def get_ticker():
 
     prompt = (
         f"The brand '{brand_name}' has an ESG risk score of {esg_score}. "
-        f"Suggest 3 alternative companies in the same industry (e.g., sportswear, apparel, or footwear) "
+        f"Suggest 3 alternative companies in the same industry (e.g., sportswear, apparel, or footwear)"
         f"with better ESG performance. For each brand, include:\n"
         f"- Brand Name\n"
         f"- Stock Ticker (if available)\n"
-        f"- ESG Risk Score (approximate)\n"
+        f"- Latest ESG Risk Score (in value only)\n"
         f"- Homepage URL\n"
         f"Return the response as a JSON array of 3 objects with fields: brand_name, ticker, esg_score, homepage."
     )
