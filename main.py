@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from utils.yfinance import get_esg_scores
+from utils.getLogo import fetch_image_url
 import google.generativeai as genai
 import yfinance as yf
 import os
@@ -40,11 +41,13 @@ def get_ticker():
                 continue
             score = get_esg_scores(ticker)
             if score is not None and score < esg_score:
+                image_url = fetch_image_url(item.get("brand_name"))
                 validated.append({
                     "brand_name": item.get("brand_name"),
                     "ticker": ticker,
                     "esg_score": score,
-                    "homepage": item.get("homepage")
+                    "homepage": item.get("homepage"),
+                    "image_url": image_url
                 })
             if len(validated) == 3:
                 break
