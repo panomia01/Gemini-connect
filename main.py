@@ -1,3 +1,4 @@
+from urllib.parse import urlparse
 from flask import Flask, request, jsonify
 from utils.yfinance import get_esg_scores
 from utils.getLogo import fetch_image_url
@@ -41,7 +42,9 @@ def get_ticker():
                 continue
             score = get_esg_scores(ticker)
             if score is not None and score < esg_score:
-                image_url = fetch_image_url(item.get("brand_name"))
+                homepage = item.get("homepage")
+                domain = urlparse(homepage).netloc.replace("www.", "") if homepage else None
+                image_url = fetch_image_url(domain) if domain else "/static/default-logo.png"
                 validated.append({
                     "brand_name": item.get("brand_name"),
                     "ticker": ticker,
