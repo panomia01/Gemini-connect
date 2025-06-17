@@ -1,5 +1,2 @@
-gunicorn
-flask
-google-genai
-yfinance
-requests
+Flask
+google-generativeai
