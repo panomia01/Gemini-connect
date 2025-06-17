@@ -32,7 +32,7 @@ def get_ticker():
         print("[Gemini Response Raw]:", raw)
 
         suggestions = json.loads(raw)
-    
+
         validated = []
         for item in suggestions:
             ticker = item.get("ticker")
@@ -46,6 +46,8 @@ def get_ticker():
                     "esg_score": score,
                     "homepage": item.get("homepage")
                 })
+            if len(validated) == 3:
+                break
 
         # Return top 3 valid ones
         return jsonify({
