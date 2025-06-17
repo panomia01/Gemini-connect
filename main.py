@@ -21,7 +21,7 @@ def get_esg_score(ticker_symbol):
     return None
 
 @app.route("/get_ticker", methods=["GET"])
-def get_ticker():
+async def get_ticker():
     brand_name = request.args.get("brand_name")
     esg_score = request.args.get("esg_score", type=float)
 
@@ -47,7 +47,7 @@ def get_ticker():
             ticker = item.get("ticker")
             if not ticker:
                 continue
-            score = get_esg_score(ticker)
+            score = await get_esg_score(ticker)
             if score is not None and score < esg_score:
                 validated.append({
                     "brand_name": item.get("brand_name"),
