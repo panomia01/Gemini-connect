@@ -50,10 +50,17 @@ def get_ticker():
                 break
 
         # Return top 3 valid ones
-        return jsonify({
-            "brand_name": brand_name,
-            "alternatives": validated[:3]
-        })
+        # Return recommendations or a message if none found
+        if validated:
+            return jsonify({
+                "brand_name": brand_name,
+                "alternatives": validated
+            })
+        else:
+            return jsonify({
+                "brand_name": brand_name,
+                "message": "No recommendations found with a lower ESG score."
+            }), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
